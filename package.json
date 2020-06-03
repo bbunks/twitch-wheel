@@ -1,0 +1,10 @@
+{
+  "name": "picker-wheel",
+  "version": "1.0.0",
+  "description": "a picker wheel that reads input from twitch",
+  "main": "index.js",
+  "repository": "git@github.com:nuiofrd/twitch-wheel.git",
+  "author": "Brenden Bunker",
+  "license": "MIT",
+  "private": false
+}
