@@ -14,16 +14,6 @@ app.get("/", (req, res) => {
 
 const requests = [];
 
-const updateClientsProcesses = [];
-const updateClients = (newRequest) => {
-    console.log("Updating Client");
-    updateClientsProcesses.forEach((func) => func(newRequest));
-};
-
-const addClient = (updateFunction) => {
-    updateClientsProcesses.push(updateFunction);
-};
-
 // Define configuration options
 const opts = {
     identity: {
@@ -40,6 +30,10 @@ io.on("connection", function (socket) {
 
     socket.on("disconnect", function () {
         console.log("user disconnected");
+    });
+
+    socket.on("spin", function () {
+        io.emit("spin");
     });
 });
 
@@ -64,7 +58,7 @@ function onMessageHandler(target, context, msg, self) {
     const command = commandSplitout.shift();
 
     // If the command is known, let's execute it
-    if (command === "!request") {
+    if (command === "!r") {
         request = null;
         requests.forEach((item) => {
             if (item["username"] === context["display-name"]) {
