@@ -1,0 +1,154 @@
+webpackHotUpdate("main",{
+
+/***/ "./src/components/Home/Spinner/Spinner.jsx":
+/*!*************************************************!*\
+  !*** ./src/components/Home/Spinner/Spinner.jsx ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _customHooks_WindowDimensions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../customHooks/WindowDimensions */ "./src/customHooks/WindowDimensions.js");
+/* harmony import */ var _Card_Card__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Card/Card */ "./src/components/Home/Card/Card.jsx");
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! uuid/v4 */ "../node_modules/uuid/v4.js");
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(uuid_v4__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Arrow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Arrow */ "./src/components/Home/Arrow.jsx");
+var _jsxFileName = "/mnt/c/Users/brend/Documents/dev/JS/twitch-wheel/client/src/components/Home/Spinner/Spinner.jsx";
+
+
+
+
+
+
+function Spinner(props) {
+  const [currRequests, setCurrRequests] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  const [winner, setWinner] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0);
+  const {
+    height,
+    width
+  } = Object(_customHooks_WindowDimensions__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  const containerRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  const winnerRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log("translate(0, " + (props.spinning ? -1 * (winnerRef.current ? winnerRef.current.offsetTop : 0) + height / 2 - (winnerRef.current ? winnerRef.current.clientHeight : 0) / 2 + "px" : -1 * containerHeight + "px") + ")");
+    console.log("Winner: " + winner);
+    console.log(winnerRef);
+    spin();
+  }, [props.spinning]);
+
+  function spin() {
+    if (props.spinning) {
+      setCurrRequests([...props.requests]);
+    } else {
+      setWinner(() => Math.round(Math.random() * 30) + 7);
+    }
+  }
+
+  let colorIndex = -1;
+  const colors = [{
+    background: "orange",
+    text: "black"
+  }, {
+    background: "yellow",
+    text: "black"
+  }, {
+    background: "limegreen",
+    text: "black"
+  }, {
+    background: "deepskyblue",
+    text: "black"
+  }, {
+    background: "blue",
+    text: "white"
+  }, {
+    background: "rebeccapurple",
+    text: "white"
+  }, {
+    background: "red",
+    text: "white"
+  }];
+  const minArraySize = 100;
+  let grownRequests = [...currRequests];
+
+  while (currRequests.length > 0 && grownRequests.length < minArraySize) {
+    grownRequests = [...currRequests, ...grownRequests];
+  }
+
+  const containerHeight = containerRef.current ? containerRef.current.clientHeight : 0; //console.log(height);
+
+  let transitionDuration;
+
+  if (currRequests.length === 0) {
+    transitionDuration = 0;
+  } else if (props.spinning) {
+    transitionDuration = 7.5;
+  } else {
+    transitionDuration = 0.75;
+  }
+
+  const style = {
+    display: "flex-inline",
+    flexDirection: "column",
+    transitionDuration: transitionDuration + "s",
+    transform: "translate(0, " + (props.spinning ? -1 * (winnerRef.current ? winnerRef.current.offsetTop : 0) + height / 2 - (winnerRef.current ? winnerRef.current.clientHeight : 0) / 2 + "px" : -1 * containerHeight + "px") + ")",
+    width: "465px"
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Arrow__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    spinning: props.spin,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 93,
+      columnNumber: 13
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: style,
+    ref: containerRef,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 94,
+      columnNumber: 13
+    }
+  }, grownRequests.map(ele => {
+    colorIndex += 1;
+    return colorIndex === winner ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Card_Card__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      key: uuid_v4__WEBPACK_IMPORTED_MODULE_3___default()(),
+      color: colors[colorIndex % colors.length],
+      forwardRef: winnerRef,
+      request: ele.request,
+      username: ele.username,
+      colorIndex: colorIndex,
+      large: colorIndex === winner,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 98,
+        columnNumber: 25
+      }
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Card_Card__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      key: uuid_v4__WEBPACK_IMPORTED_MODULE_3___default()(),
+      color: colors[colorIndex % colors.length],
+      request: ele.request,
+      username: ele.username,
+      colorIndex: colorIndex,
+      large: colorIndex === winner,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 108,
+        columnNumber: 25
+      }
+    });
+  })));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Spinner);
+
+/***/ })
+
+})
+//# sourceMappingURL=main.31ced39a932c74ad55b8.hot-update.js.map

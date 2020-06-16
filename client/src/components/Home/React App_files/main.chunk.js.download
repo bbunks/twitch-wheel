@@ -1,0 +1,942 @@
+(this["webpackJsonpclient"] = this["webpackJsonpclient"] || []).push([["main"],{
+
+/***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./src/index.css":
+/*!**************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-3-1!./node_modules/postcss-loader/src??postcss!./src/index.css ***!
+  \**************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "body {\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n    sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  background-color: #333;\n  color: white;\n  overflow-y: hidden;\n}\n\ncode {\n  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',\n    monospace;\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./src/App.jsx":
+/*!*********************!*\
+  !*** ./src/App.jsx ***!
+  \*********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _customHooks_StickyState__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./customHooks/StickyState */ "./src/customHooks/StickyState.js");
+/* harmony import */ var _components_Home_Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Home/Home */ "./src/components/Home/Home.jsx");
+/* harmony import */ var _components_Login_Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Login/Login */ "./src/components/Login/Login.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _components_Remote_Remote__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Remote/Remote */ "./src/components/Remote/Remote.jsx");
+/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
+/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_6__);
+var _jsxFileName = "/mnt/c/Users/brend/Documents/dev/JS/twitch-wheel/client/src/App.jsx";
+
+
+
+
+
+
+
+
+function App() {
+  const [requests, setRequests] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  const [spin, setSpin] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const socket = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log("connected");
+    socket.current = socket_io_client__WEBPACK_IMPORTED_MODULE_6___default()("http://localhost:3000");
+    socket.current.on("connect", () => {
+      console.log("connected");
+    });
+    socket.current.on("init", data => {
+      setRequests(data);
+    });
+    socket.current.on("spin", data => {
+      setSpin(prev => !prev);
+    });
+    socket.current.on("newRequest", data => {
+      setRequests(prev => {
+        const filteredList = prev.filter(i => i.username !== data.username);
+        return [...filteredList, data];
+      });
+    });
+  }, []);
+
+  function sendSpin() {
+    socket.current.emit("spin");
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["BrowserRouter"], {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 41,
+      columnNumber: 9
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "App",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 42,
+      columnNumber: 13
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Switch"], {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 43,
+      columnNumber: 17
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+    path: "/viewer",
+    exact: true,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 44,
+      columnNumber: 21
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Home_Home__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    spin: spin,
+    requests: requests,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 45,
+      columnNumber: 25
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
+    path: "/remote",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 47,
+      columnNumber: 21
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Remote_Remote__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    requests: requests,
+    sendSpin: sendSpin,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 48,
+      columnNumber: 25
+    }
+  })))));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./src/components/Home/Arrow.jsx":
+/*!***************************************!*\
+  !*** ./src/components/Home/Arrow.jsx ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _customHooks_WindowDimensions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../customHooks/WindowDimensions */ "./src/customHooks/WindowDimensions.js");
+var _jsxFileName = "/mnt/c/Users/brend/Documents/dev/JS/twitch-wheel/client/src/components/Home/Arrow.jsx";
+
+
+
+function Arrow(props) {
+  const containerRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  const {
+    height,
+    width
+  } = Object(_customHooks_WindowDimensions__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  const ArrowHeight = containerRef.current ? containerRef.current.clientHeight : 0;
+  const arrowStyle = {
+    zIndex: 100,
+    position: "fixed",
+    left: props.spinning ? "-.5em" : "-10em",
+    top: height / 2 - ArrowHeight / 2 + "px",
+    transitionDuration: ".5s"
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    viewBox: "0 0 448 512",
+    width: "10em",
+    height: "10em",
+    style: arrowStyle,
+    ref: containerRef,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 18,
+      columnNumber: 9
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    xmlns: "http://www.w3.org/2000/svg",
+    stroke: "white",
+    strokeWidth: "15",
+    d: "M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25,
+      columnNumber: 13
+    }
+  }));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Arrow);
+
+/***/ }),
+
+/***/ "./src/components/Home/Card/Card.jsx":
+/*!*******************************************!*\
+  !*** ./src/components/Home/Card/Card.jsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var _jsxFileName = "/mnt/c/Users/brend/Documents/dev/JS/twitch-wheel/client/src/components/Home/Card/Card.jsx";
+
+
+function Card(props) {
+  const style = {
+    width: "320px",
+    height: "160px",
+    backgroundColor: props.color.background,
+    color: props.color.text,
+    borderRadius: ".5rem",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    margin: "12px",
+    transitionDuration: "1s",
+    textAlign: "center"
+  };
+
+  if (props.large) {
+    style.width = "30rem";
+    style.height = "15rem";
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: style,
+    ref: props.forwardRef,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 23,
+      columnNumber: 9
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24,
+      columnNumber: 13
+    }
+  }, props.request), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25,
+      columnNumber: 13
+    }
+  }, props.username, " ", props.colorIndex));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Card);
+
+/***/ }),
+
+/***/ "./src/components/Home/Home.jsx":
+/*!**************************************!*\
+  !*** ./src/components/Home/Home.jsx ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Arrow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Arrow */ "./src/components/Home/Arrow.jsx");
+/* harmony import */ var _Spinner_Spinner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Spinner/Spinner */ "./src/components/Home/Spinner/Spinner.jsx");
+var _jsxFileName = "/mnt/c/Users/brend/Documents/dev/JS/twitch-wheel/client/src/components/Home/Home.jsx";
+
+
+ //const io = require("socket.io-client");
+
+function Home(props) {
+  //Shuffle the requests and truncate the list to 100
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Spinner_Spinner__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    requests: props.requests,
+    spinning: props.spin,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 11,
+      columnNumber: 13
+    }
+  }));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Home);
+
+/***/ }),
+
+/***/ "./src/components/Home/Spinner/Spinner.jsx":
+/*!*************************************************!*\
+  !*** ./src/components/Home/Spinner/Spinner.jsx ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _customHooks_WindowDimensions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../customHooks/WindowDimensions */ "./src/customHooks/WindowDimensions.js");
+/* harmony import */ var _Card_Card__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Card/Card */ "./src/components/Home/Card/Card.jsx");
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! uuid/v4 */ "../node_modules/uuid/v4.js");
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(uuid_v4__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Arrow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Arrow */ "./src/components/Home/Arrow.jsx");
+var _jsxFileName = "/mnt/c/Users/brend/Documents/dev/JS/twitch-wheel/client/src/components/Home/Spinner/Spinner.jsx";
+
+
+
+
+
+
+function Spinner(props) {
+  const [currRequests, setCurrRequests] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  const [winner, setWinner] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0);
+  const {
+    height,
+    width
+  } = Object(_customHooks_WindowDimensions__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  const containerRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  const winnerRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log("translate(0, " + (props.spinning ? -1 * (winnerRef.current ? winnerRef.current.offsetTop : 0) + height / 2 - (winnerRef.current ? winnerRef.current.clientHeight : 0) / 2 + "px" : -1 * containerHeight + "px") + ")");
+    console.log("Winner: " + winner);
+    console.log(winnerRef);
+    spin();
+  }, [props.spinning]);
+
+  function spin() {
+    if (props.spinning) {
+      setCurrRequests([...props.requests]);
+    } else {
+      setWinner(() => Math.round(Math.random() * 30) + 7);
+    }
+  }
+
+  let colorIndex = -1;
+  const colors = [{
+    background: "orange",
+    text: "black"
+  }, {
+    background: "yellow",
+    text: "black"
+  }, {
+    background: "limegreen",
+    text: "black"
+  }, {
+    background: "deepskyblue",
+    text: "black"
+  }, {
+    background: "blue",
+    text: "white"
+  }, {
+    background: "rebeccapurple",
+    text: "white"
+  }, {
+    background: "red",
+    text: "white"
+  }];
+  const minArraySize = 100;
+  let grownRequests = [...currRequests];
+
+  while (currRequests.length > 0 && grownRequests.length < minArraySize) {
+    grownRequests = [...currRequests, ...grownRequests];
+  }
+
+  const containerHeight = containerRef.current ? containerRef.current.clientHeight : 0; //console.log(height);
+
+  let transitionDuration;
+
+  if (currRequests.length === 0) {
+    transitionDuration = 0;
+  } else if (props.spinning) {
+    transitionDuration = 7.5;
+  } else {
+    transitionDuration = 0.75;
+  }
+
+  const style = {
+    display: "flex-inline",
+    flexDirection: "column",
+    transitionDuration: transitionDuration + "s",
+    transform: "translate(0, " + (props.spinning ? -1 * (winnerRef.current ? winnerRef.current.offsetTop : 0) + height / 2 - (winnerRef.current ? winnerRef.current.clientHeight : 0) / 2 + "px" : -1 * containerHeight + "px") + ")",
+    width: "465px"
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Arrow__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    spinning: props.spin,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 93,
+      columnNumber: 13
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: style,
+    ref: containerRef,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 94,
+      columnNumber: 13
+    }
+  }, grownRequests.map(ele => {
+    colorIndex += 1;
+    return colorIndex === winner ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Card_Card__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      key: uuid_v4__WEBPACK_IMPORTED_MODULE_3___default()(),
+      color: colors[colorIndex % colors.length],
+      forwardRef: winnerRef,
+      request: ele.request,
+      username: ele.username,
+      colorIndex: colorIndex,
+      large: colorIndex === winner,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 98,
+        columnNumber: 25
+      }
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Card_Card__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      key: uuid_v4__WEBPACK_IMPORTED_MODULE_3___default()(),
+      color: colors[colorIndex % colors.length],
+      request: ele.request,
+      username: ele.username,
+      colorIndex: colorIndex,
+      large: colorIndex === winner,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 108,
+        columnNumber: 25
+      }
+    });
+  })));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Spinner);
+
+/***/ }),
+
+/***/ "./src/components/Login/EntryField/EntryField.jsx":
+/*!********************************************************!*\
+  !*** ./src/components/Login/EntryField/EntryField.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var _jsxFileName = "/mnt/c/Users/brend/Documents/dev/JS/twitch-wheel/client/src/components/Login/EntryField/EntryField.jsx";
+
+
+function EntryField(props) {
+  let labelStyle = {
+    padding: "1rem"
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 9,
+      columnNumber: 9
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    style: labelStyle,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 10,
+      columnNumber: 13
+    }
+  }, props.label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: props.hideChars ? "password" : "text",
+    value: props.value,
+    onChange: e => {
+      props.onChange(e.target.value);
+    },
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 11,
+      columnNumber: 13
+    }
+  }));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (EntryField);
+
+/***/ }),
+
+/***/ "./src/components/Login/Login.jsx":
+/*!****************************************!*\
+  !*** ./src/components/Login/Login.jsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _EntryField_EntryField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EntryField/EntryField */ "./src/components/Login/EntryField/EntryField.jsx");
+var _jsxFileName = "/mnt/c/Users/brend/Documents/dev/JS/twitch-wheel/client/src/components/Login/Login.jsx";
+
+
+
+function Login(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6,
+      columnNumber: 9
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EntryField_EntryField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    label: "Username",
+    value: props.username,
+    onChange: props.setUsername,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 7,
+      columnNumber: 13
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EntryField_EntryField__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    hideChars: true,
+    label: "Oauth Token",
+    value: props.oauthToken,
+    onChange: props.setOauthToken,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 12,
+      columnNumber: 13
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: () => props.setAuthenticated(true),
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 18,
+      columnNumber: 13
+    }
+  }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 19,
+      columnNumber: 13
+    }
+  }, "Please get a OAuth token from", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://twitchapps.com/tmi/",
+    target: "_blank",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21,
+      columnNumber: 17
+    }
+  }, "here")));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Login);
+
+/***/ }),
+
+/***/ "./src/components/Remote/Remote.jsx":
+/*!******************************************!*\
+  !*** ./src/components/Remote/Remote.jsx ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var _jsxFileName = "/mnt/c/Users/brend/Documents/dev/JS/twitch-wheel/client/src/components/Remote/Remote.jsx";
+
+
+const io = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
+
+function Remote(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6,
+      columnNumber: 9
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: props.sendSpin,
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 7,
+      columnNumber: 13
+    }
+  }, "Spin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 8,
+      columnNumber: 13
+    }
+  }, props.requests.map(request => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 11,
+        columnNumber: 25
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 12,
+        columnNumber: 29
+      }
+    }, request.request), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 13,
+        columnNumber: 29
+      }
+    }, request.username));
+  })));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Remote);
+
+/***/ }),
+
+/***/ "./src/customHooks/StickyState.js":
+/*!****************************************!*\
+  !*** ./src/customHooks/StickyState.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return useStickyState; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function useStickyState(defaultValue, key) {
+  const [value, setValue] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(() => {
+    const stickyValue = window.localStorage.getItem(key);
+    return stickyValue !== null ? JSON.parse(stickyValue) : defaultValue;
+  });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+  return [value, setValue];
+}
+
+/***/ }),
+
+/***/ "./src/customHooks/WindowDimensions.js":
+/*!*********************************************!*\
+  !*** ./src/customHooks/WindowDimensions.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return useWindowDimensions; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function getWindowDimensions() {
+  const {
+    innerWidth: width,
+    innerHeight: height
+  } = window;
+  return {
+    width,
+    height
+  };
+}
+
+function useWindowDimensions() {
+  const [windowDimensions, setWindowDimensions] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getWindowDimensions());
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  return windowDimensions;
+}
+
+/***/ }),
+
+/***/ "./src/index.css":
+/*!***********************!*\
+  !*** ./src/index.css ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--6-oneOf-3-1!../node_modules/postcss-loader/src??postcss!./index.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./src/index.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(true) {
+	module.hot.accept(/*! !../node_modules/css-loader/dist/cjs.js??ref--6-oneOf-3-1!../node_modules/postcss-loader/src??postcss!./index.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./src/index.css", function() {
+		var newContent = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--6-oneOf-3-1!../node_modules/postcss-loader/src??postcss!./index.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./src/index.css");
+
+		if(typeof newContent === 'string') newContent = [[module.i, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index.css */ "./src/index.css");
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./App */ "./src/App.jsx");
+/* harmony import */ var _serviceWorker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./serviceWorker */ "./src/serviceWorker.js");
+var _jsxFileName = "/mnt/c/Users/brend/Documents/dev/JS/twitch-wheel/client/src/index.js";
+
+
+
+
+
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.StrictMode, {
+  __self: undefined,
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 8,
+    columnNumber: 5
+  }
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  __self: undefined,
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 9,
+    columnNumber: 9
+  }
+})), document.getElementById("root")); // If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+
+_serviceWorker__WEBPACK_IMPORTED_MODULE_4__["unregister"]();
+
+/***/ }),
+
+/***/ "./src/serviceWorker.js":
+/*!******************************!*\
+  !*** ./src/serviceWorker.js ***!
+  \******************************/
+/*! exports provided: register, unregister */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unregister", function() { return unregister; });
+// This optional code is used to register a service worker.
+// register() is not called by default.
+// This lets the app load faster on subsequent visits in production, and gives
+// it offline capabilities. However, it also means that developers (and users)
+// will only see deployed updates on subsequent visits to a page, after all the
+// existing tabs open on the page have been closed, since previously cached
+// resources are updated in the background.
+// To learn more about the benefits of this model and instructions on how to
+// opt-in, read https://bit.ly/CRA-PWA
+const isLocalhost = Boolean(window.location.hostname === 'localhost' || // [::1] is the IPv6 localhost address.
+window.location.hostname === '[::1]' || // 127.0.0.0/8 are considered localhost for IPv4.
+window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/));
+function register(config) {
+  if (false) {}
+}
+
+function registerValidSW(swUrl, config) {
+  navigator.serviceWorker.register(swUrl).then(registration => {
+    registration.onupdatefound = () => {
+      const installingWorker = registration.installing;
+
+      if (installingWorker == null) {
+        return;
+      }
+
+      installingWorker.onstatechange = () => {
+        if (installingWorker.state === 'installed') {
+          if (navigator.serviceWorker.controller) {
+            // At this point, the updated precached content has been fetched,
+            // but the previous service worker will still serve the older
+            // content until all client tabs are closed.
+            console.log('New content is available and will be used when all ' + 'tabs for this page are closed. See https://bit.ly/CRA-PWA.'); // Execute callback
+
+            if (config && config.onUpdate) {
+              config.onUpdate(registration);
+            }
+          } else {
+            // At this point, everything has been precached.
+            // It's the perfect time to display a
+            // "Content is cached for offline use." message.
+            console.log('Content is cached for offline use.'); // Execute callback
+
+            if (config && config.onSuccess) {
+              config.onSuccess(registration);
+            }
+          }
+        }
+      };
+    };
+  }).catch(error => {
+    console.error('Error during service worker registration:', error);
+  });
+}
+
+function checkValidServiceWorker(swUrl, config) {
+  // Check if the service worker can be found. If it can't reload the page.
+  fetch(swUrl, {
+    headers: {
+      'Service-Worker': 'script'
+    }
+  }).then(response => {
+    // Ensure service worker exists, and that we really are getting a JS file.
+    const contentType = response.headers.get('content-type');
+
+    if (response.status === 404 || contentType != null && contentType.indexOf('javascript') === -1) {
+      // No service worker found. Probably a different app. Reload the page.
+      navigator.serviceWorker.ready.then(registration => {
+        registration.unregister().then(() => {
+          window.location.reload();
+        });
+      });
+    } else {
+      // Service worker found. Proceed as normal.
+      registerValidSW(swUrl, config);
+    }
+  }).catch(() => {
+    console.log('No internet connection found. App is running in offline mode.');
+  });
+}
+
+function unregister() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then(registration => {
+      registration.unregister();
+    }).catch(error => {
+      console.error(error.message);
+    });
+  }
+}
+
+/***/ }),
+
+/***/ 1:
+/*!**************************************************************************************************************!*\
+  !*** multi (webpack)/hot/dev-server.js ./node_modules/react-dev-utils/webpackHotDevClient.js ./src/index.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! /mnt/c/Users/brend/Documents/dev/JS/twitch-wheel/client/node_modules/webpack/hot/dev-server.js */"./node_modules/webpack/hot/dev-server.js");
+__webpack_require__(/*! /mnt/c/Users/brend/Documents/dev/JS/twitch-wheel/client/node_modules/react-dev-utils/webpackHotDevClient.js */"./node_modules/react-dev-utils/webpackHotDevClient.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/brend/Documents/dev/JS/twitch-wheel/client/src/index.js */"./src/index.js");
+
+
+/***/ }),
+
+/***/ 2:
+/*!********************!*\
+  !*** ws (ignored) ***!
+  \********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ })
+
+},[[1,"runtime-main",1]]]);
+//# sourceMappingURL=main.chunk.js.map
