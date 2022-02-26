@@ -1,19 +1,34 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import useWindowDimensions from "../../customHooks/WindowDimensions";
 
 function Arrow(props) {
     const containerRef = useRef(null);
     const { height, width } = useWindowDimensions();
-    const ArrowHeight = containerRef.current ? containerRef.current.clientHeight : 0;
+    const ArrowHeight = containerRef.current
+        ? containerRef.current.clientHeight
+        : 0;
 
-    const arrowStyle = {
+    let left = -1000;
+
+    if (containerRef.current) {
+        if (props.spinning) {
+            left = props.right - containerRef.current.width.baseVal.value;
+        } else {
+            left = -containerRef.current.width.baseVal.value;
+        }
+    }
+
+    let arrowStyle = {
         zIndex: 100,
         position: "fixed",
-        left: props.spinning ? "-.5em" : "-10em",
+        left: left + "px",
         top: height / 2 - ArrowHeight / 2 + "px",
         transitionDuration: ".5s",
     };
 
+    console.log(
+        containerRef.current ? containerRef.current.width.baseVal.value : 0
+    );
     return (
         <svg
             viewBox="0 0 448 512"

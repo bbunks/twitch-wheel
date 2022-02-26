@@ -1,5 +1,3 @@
-import React from "react";
-
 function EntryField(props) {
     let labelStyle = {
         padding: "1rem",
