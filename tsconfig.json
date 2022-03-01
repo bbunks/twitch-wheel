@@ -1,14 +1,17 @@
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "module": "commonjs",
-        "declaration": true,
-        "outDir": "./lib",
-        "strict": true,
-        "noImplicitAny": true,
-        "moduleResolution": "Node",
-        "jsx": "react-jsx"
-    },
-    "include": ["server/**/*.ts", "client/**/*.ts", "server/index.ts"],
-    "exclude": ["node_modules", "client"]
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "./lib",
+    "strict": true,
+    "noImplicitAny": true,
+    "moduleResolution": "Node",
+    "jsx": "react-jsx",
+    "lib": ["esnext"],
+    "sourceMap": true,
+    "esModuleInterop": true
+  },
+  "include": ["server/**/*.ts", "client/**/*.ts", "server/index.ts"],
+  "exclude": ["node_modules", "client"]
 }

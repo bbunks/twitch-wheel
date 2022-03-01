@@ -1,14 +1,16 @@
 import { ChatUserstate, client as tmiClient } from "tmi.js";
-import * as express from "express";
+import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import * as path from "path";
 import "dotenv/config";
 import { Request } from "./types/SpinnerTypes";
+import { PrismaClient } from "@prisma/client";
 
 const app = express();
 const server = createServer(app);
 const io = new Server(server, {});
+const prisma = new PrismaClient();
 
 app.use(express.static(path.join(__dirname, "client/build")));
 
@@ -16,7 +18,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
-let requests: Request[] = [];
+const requests: Request[] = [];
 
 // Define configuration options
 const opts = {
