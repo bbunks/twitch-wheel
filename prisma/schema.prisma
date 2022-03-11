@@ -8,21 +8,37 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  role     Role
-  username String
-  Request  Request?
+  id                 Int    @id @unique @default(autoincrement())
+  role               Role
+  username           String
+  oidc_userid        String @unique
+  oidc_refresh_token String
+}
+
+model Participant {
+  id        Int      @id @default(autoincrement())
+  role      Role
+  username  String
+  Request   Request? @relation
+  requestId Int?
 }
 
 model Request {
-  id      Int    @id @default(autoincrement())
-  userId  Int    @unique
-  User    User   @relation(fields: [userId], references: [id])
-  request String
+  id            Int         @id @default(autoincrement())
+  participantId Int         @unique
+  participant   Participant @relation(fields: [participantId], references: [id])
+  request       String
 }
 
 enum Role {
   User
   Moderator
   Admin
+}
+
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt DateTime
 }
